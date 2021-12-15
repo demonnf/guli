@@ -42,7 +42,7 @@ public class EduTeacherController {
     /*逻辑删除*/
     @ApiOperation("根据ID删除讲师")
     @DeleteMapping("{id}")
-    public Result deletebyid(@PathVariable Integer id) {
+    public Result deletebyid(@PathVariable String id) {
         boolean boo = eduTeacherService.removeById(id);
         if (boo) {
             return Result.ok();
@@ -107,7 +107,7 @@ public class EduTeacherController {
 
     @ApiOperation("根据ID获得讲师")
     @GetMapping("findteacher/{id}")
-    public Result findTeacherbyid(@PathVariable Integer id) {
+    public Result findTeacherbyid(@PathVariable String id) {
         EduTeacher byId = eduTeacherService.getById(id);
         return Result.ok().data("item", byId);
 
@@ -116,7 +116,7 @@ public class EduTeacherController {
     @ApiOperation("更新讲师")
     @PostMapping("updateteacher")
     public Result updateTeacher(@RequestBody(required = false) EduTeacher eduTeacher) {
-        boolean update = eduTeacherService.update(eduTeacher, null);
+        boolean update = eduTeacherService.updateById(eduTeacher);
         if (update) {
             return Result.ok();
         } else {
